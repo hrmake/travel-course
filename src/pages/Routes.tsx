@@ -88,7 +88,7 @@ const Routes = () => {
                   ))}
                 </div>
 
-                {selectedCategories.length > 0 && (
+                {selectedCategories.length > 0 && !showRoute && (
                   <div className="flex justify-center pt-4">
                     <Button 
                       variant="toss"
@@ -99,45 +99,86 @@ const Routes = () => {
                     </Button>
                   </div>
                 )}
+
+                {showRoute && (
+                  <div className="flex justify-center pt-4 space-x-3">
+                    <Button 
+                      variant="outline"
+                      size="lg"
+                      onClick={() => {
+                        setShowRoute(false);
+                        setSelectedCategories([]);
+                        setSelectedRegion(null);
+                      }}
+                    >
+                      새로운 루트 만들기
+                    </Button>
+                    <Button 
+                      variant="toss"
+                      size="lg"
+                      onClick={generateRoute}
+                    >
+                      다른 루트 추천받기
+                    </Button>
+                  </div>
+                )}
               </div>
             )}
           </CardContent>
         </Card>
 
         {showRoute && (
-          <Card className="shadow-card border bg-card animate-fadeIn">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <MapPin className="h-5 w-5 text-primary" />
-                <span>추천 여행 루트</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {sampleRoute.map((stop, index) => (
-                  <div key={index} className="flex items-center space-x-4 p-4 bg-secondary rounded-lg shadow-card">
-                    <div className="flex-shrink-0 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-semibold">
-                      {index + 1}
-                    </div>
-                    <div className="flex-1 space-y-1">
-                      <h4 className="font-semibold text-foreground">{stop.name}</h4>
-                      <div className="flex items-center space-x-3 text-sm text-muted-foreground">
-                        <div className="flex items-center space-x-1">
-                          <Clock className="h-3 w-3" />
-                          <span>{stop.time}</span>
-                        </div>
-                        <span>•</span>
-                        <span>{stop.duration}</span>
-                      </div>
-                    </div>
-                    <Badge className="bg-primary-light text-primary border-0">
-                      {stop.category}
-                    </Badge>
+          <div className="space-y-6 animate-fadeIn">
+            <Card className="shadow-card border bg-card">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <MapPin className="h-5 w-5 text-primary" />
+                    <span>추천 여행 루트</span>
                   </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+                  <Badge className="bg-primary-light text-primary border-0">
+                    {selectedRegion && selectedRegion === "seoul" ? "서울" : 
+                     selectedRegion === "busan" ? "부산" : 
+                     selectedRegion === "jeju" ? "제주" : 
+                     selectedRegion === "gyeongju" ? "경주" : 
+                     selectedRegion === "daegu" ? "대구" : "인천"} 여행
+                  </Badge>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {sampleRoute.map((stop, index) => (
+                    <div key={index} className="flex items-center space-x-4 p-4 bg-secondary rounded-lg shadow-card">
+                      <div className="flex-shrink-0 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-semibold">
+                        {index + 1}
+                      </div>
+                      <div className="flex-1 space-y-1">
+                        <h4 className="font-semibold text-foreground">{stop.name}</h4>
+                        <div className="flex items-center space-x-3 text-sm text-muted-foreground">
+                          <div className="flex items-center space-x-1">
+                            <Clock className="h-3 w-3" />
+                            <span>{stop.time}</span>
+                          </div>
+                          <span>•</span>
+                          <span>{stop.duration}</span>
+                        </div>
+                      </div>
+                      <Badge className="bg-primary-light text-primary border-0">
+                        {stop.category}
+                      </Badge>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="bg-accent rounded-lg p-6 text-center space-y-3">
+              <h3 className="font-semibold text-foreground">다른 루트도 궁금하시나요?</h3>
+              <p className="text-sm text-muted-foreground">
+                같은 지역에서 다른 조합의 루트를 추천받거나, 완전히 새로운 여행을 계획해보세요
+              </p>
+            </div>
+          </div>
         )}
       </main>
     </div>
