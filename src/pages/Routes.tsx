@@ -43,7 +43,7 @@ const Routes = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-background">
+    <div className="min-h-screen bg-background">
       <Navigation />
       
       <main className="max-w-4xl mx-auto px-4 py-8 space-y-8">
@@ -56,7 +56,7 @@ const Routes = () => {
           </p>
         </div>
 
-        <Card className="shadow-soft border-0 bg-card">
+        <Card className="shadow-card border bg-card">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
               <RouteIcon className="h-5 w-5 text-primary" />
@@ -78,8 +78,8 @@ const Routes = () => {
                   {categories.map((category) => (
                     <Button
                       key={category.id}
-                      variant={selectedCategories.includes(category.id) ? "travel" : "outline"}
-                      className="flex flex-col items-center p-4 h-auto space-y-2"
+                      variant={selectedCategories.includes(category.id) ? "toss" : "outline"}
+                      className="flex flex-col items-center p-4 h-auto space-y-2 transition-colors duration-200"
                       onClick={() => handleCategoryToggle(category.id)}
                     >
                       <span className="text-xl">{category.emoji}</span>
@@ -91,7 +91,7 @@ const Routes = () => {
                 {selectedCategories.length > 0 && (
                   <div className="flex justify-center pt-4">
                     <Button 
-                      variant="hero"
+                      variant="toss"
                       size="lg"
                       onClick={generateRoute}
                     >
@@ -105,7 +105,7 @@ const Routes = () => {
         </Card>
 
         {showRoute && (
-          <Card className="shadow-soft border-0 bg-card animate-fadeIn">
+          <Card className="shadow-card border bg-card animate-fadeIn">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
                 <MapPin className="h-5 w-5 text-primary" />
@@ -115,7 +115,7 @@ const Routes = () => {
             <CardContent>
               <div className="space-y-4">
                 {sampleRoute.map((stop, index) => (
-                  <div key={index} className="flex items-center space-x-4 p-4 bg-gradient-card rounded-lg shadow-soft">
+                  <div key={index} className="flex items-center space-x-4 p-4 bg-secondary rounded-lg shadow-card">
                     <div className="flex-shrink-0 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-semibold">
                       {index + 1}
                     </div>
@@ -130,7 +130,7 @@ const Routes = () => {
                         <span>{stop.duration}</span>
                       </div>
                     </div>
-                    <Badge className="bg-accent/10 text-accent">
+                    <Badge className="bg-primary-light text-primary border-0">
                       {stop.category}
                     </Badge>
                   </div>

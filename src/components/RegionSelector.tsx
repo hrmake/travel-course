@@ -17,13 +17,13 @@ const regions = [
 const RegionSelector = ({ selectedRegion, onRegionSelect }: RegionSelectorProps) => {
   return (
     <div className="w-full">
-      <h3 className="text-lg font-semibold text-foreground mb-4">여행지를 선택하세요</h3>
+      <h3 className="text-lg font-semibold text-foreground mb-4">어디로 떠나볼까요?</h3>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {regions.map((region) => (
           <Button
             key={region.id}
-            variant={selectedRegion === region.id ? "default" : "outline"}
-            className="flex flex-col items-center p-6 h-auto space-y-2 hover:scale-105 transition-all duration-300"
+            variant={selectedRegion === region.id ? "toss" : "outline"}
+            className="flex flex-col items-center p-6 h-auto space-y-2 hover:bg-accent transition-colors duration-200"
             onClick={() => onRegionSelect(region.id)}
           >
             <span className="text-2xl">{region.emoji}</span>

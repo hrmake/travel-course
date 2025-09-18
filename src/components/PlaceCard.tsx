@@ -28,7 +28,7 @@ const PlaceCard = ({ place }: PlaceCardProps) => {
   };
 
   return (
-    <Card className="group hover:shadow-hover transition-all duration-300 cursor-pointer bg-gradient-card border-0 shadow-soft">
+    <Card className="group hover:shadow-hover transition-all duration-200 cursor-pointer bg-card border shadow-card">
       <CardContent className="p-0">
         <div className="aspect-video bg-muted rounded-t-lg flex items-center justify-center overflow-hidden">
           {place.image ? (
